@@ -13,13 +13,18 @@ $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
+    console.log(response);
     var results = response.data;
     // Store the url to the actual gif in a variable
     for (var i = 0; i < results.length; i++){
-      var imageUrl = results[i].images.fixed_width.url;
+      var imageUrl = results[i].images.fixed_width_still.url;
 
       // Create a new img tag
       var teamImage = $("<img>").attr("src", imageUrl);
+      teamImage.attr("data-state", "still");
+      teamImage.attr("data-still", results[i].images.fixed_width_still.url);
+      teamImage.attr("data-animate", results[i].images.fixed_width.url);
+      teamImage.addClass("gif");
       
       //prepend the img tag into the images div
       $("#gifs").prepend(teamImage);
@@ -58,6 +63,20 @@ $("#add-team").on("click", function(event) {
   }
 })
 
-
 $(document).on("click", ".teamBtn", getTeam);
+
+$(".gif").on("click", function(){
+  var dataState = $(this).attr("data-state");
+
+      if (dataState === "still"){
+        var animateUrl = $(this).attr("data-animate");
+        $(this).attr("src", animateUrl);
+        $(this).attr("data-state", "animate");
+      }else {
+        var stillUrl = $(this).attr("data-still")
+        $(this).attr("src", stillUrl);
+        $(this).attr("data-state", "still");
+      }
+    });
+    
 renderButtons();

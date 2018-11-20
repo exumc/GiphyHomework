@@ -46,7 +46,10 @@ function renderButtons() {
 }
 
 // Main js
-
+var newH1 = $("<div>");
+newH1.html("<h1>Click on a gif to play/pause</h1>");
+newH1.addClass("col-md-12 text-center");
+$(".main").prepend(newH1);
 $("#search").append('<input type="text" class="form-control" id="team-input" placeholder="Input new team">');
 $("#search").append('<button type="submit" class="btn btn-primary myBtn mt-2" id="add-team">Submit</button>');
 

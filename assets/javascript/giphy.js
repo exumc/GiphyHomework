@@ -65,7 +65,7 @@ $("#add-team").on("click", function(event) {
 
 $(document).on("click", ".teamBtn", getTeam);
 
-$(".gif").on("click", function(){
+$(document).on("click", ".gif", function(){
   var dataState = $(this).attr("data-state");
 
       if (dataState === "still"){
